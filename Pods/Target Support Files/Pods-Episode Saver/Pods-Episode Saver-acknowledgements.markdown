@@ -32,6 +32,10 @@ Copyright 2016 Google Inc.
 
 Copyright 2016 Google Inc.
 
+## FirebaseAuth
+
+Copyright 2016 Google Inc. All Rights Reserved.
+
 ## FirebaseCrash
 
 Copyright 2016 Google Inc.

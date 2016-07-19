@@ -4,6 +4,9 @@ PODS:
     - Firebase/Core (= 3.2.1)
   - Firebase/Analytics (3.2.1):
     - FirebaseAnalytics (= 3.2.0)
+  - Firebase/Auth (3.2.1):
+    - Firebase/Analytics (= 3.2.1)
+    - FirebaseAuth (= 3.0.2)
   - Firebase/Core (3.2.1):
     - Firebase/Analytics (= 3.2.1)
   - Firebase/Crash (3.2.1):
@@ -22,6 +25,10 @@ PODS:
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
+    - GoogleUtilities (~> 1.3)
+  - FirebaseAuth (3.0.2):
+    - FirebaseAnalytics (~> 3.2)
+    - GoogleNetworkingUtilities (~> 1.2)
     - GoogleUtilities (~> 1.3)
   - FirebaseCrash (1.0.6):
     - FirebaseAnalytics (~> 3.0)
@@ -54,6 +61,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Firebase
+  - Firebase/Auth
   - Firebase/Crash
   - Firebase/Database
   - Firebase/Messaging
@@ -63,6 +71,7 @@ SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   Firebase: 6c80ac28d59d06bfd9152a7b6ea17625ca93183d
   FirebaseAnalytics: 6f75b04e6bfb8e0b6e9ef298e04c24eea3b13863
+  FirebaseAuth: 94b851fc345ce98036dfedfdc2eddeaef8fa3b4c
   FirebaseCrash: 899d0abc23b411d01087094e3da24527eaecabf7
   FirebaseDatabase: 34301d11621a83546f39f670d256477ba6f7fcea
   FirebaseInstanceID: d014d574053a2fe84478f12f7bae96979e7051bb
@@ -74,6 +83,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: 54e7b03982283c624b78046496da05bf02b18cd0
+PODFILE CHECKSUM: f424729642871699d3bfc4f6e35c0b2cd4426eeb
 
 COCOAPODS: 1.0.1
