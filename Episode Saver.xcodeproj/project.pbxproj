@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9211A2C51D3E3FA200A77BB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9211A2C41D3E3FA200A77BB7 /* GoogleService-Info.plist */; };
 		9271E18C1D3E3A4F003DC5A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271E18B1D3E3A4F003DC5A2 /* AppDelegate.swift */; };
 		9271E18E1D3E3A4F003DC5A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271E18D1D3E3A4F003DC5A2 /* ViewController.swift */; };
 		9271E1911D3E3A4F003DC5A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9271E18F1D3E3A4F003DC5A2 /* Main.storyboard */; };
 		9271E1931D3E3A4F003DC5A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9271E1921D3E3A4F003DC5A2 /* Assets.xcassets */; };
 		9271E1961D3E3A4F003DC5A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9271E1941D3E3A4F003DC5A2 /* LaunchScreen.storyboard */; };
+		92E51D85B833DA6C4CCDF61D /* Pods_Episode_Saver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EA854C1FD2C9A9B09B2F85 /* Pods_Episode_Saver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57485F5AB8947778FDEB14F5 /* Pods-Episode Saver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Episode Saver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Episode Saver/Pods-Episode Saver.debug.xcconfig"; sourceTree = "<group>"; };
+		9211A2C41D3E3FA200A77BB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9271E1881D3E3A4F003DC5A2 /* Episode Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Episode Saver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9271E18B1D3E3A4F003DC5A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9271E18D1D3E3A4F003DC5A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		9271E1921D3E3A4F003DC5A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9271E1951D3E3A4F003DC5A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9271E1971D3E3A4F003DC5A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99EA854C1FD2C9A9B09B2F85 /* Pods_Episode_Saver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Episode_Saver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6E81F1A73B40F4EB7244870 /* Pods-Episode Saver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Episode Saver.release.xcconfig"; path = "Pods/Target Support Files/Pods-Episode Saver/Pods-Episode Saver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E51D85B833DA6C4CCDF61D /* Pods_Episode_Saver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42042F91ECDA4499F9F7C7ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57485F5AB8947778FDEB14F5 /* Pods-Episode Saver.debug.xcconfig */,
+				F6E81F1A73B40F4EB7244870 /* Pods-Episode Saver.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9271E17F1D3E3A4E003DC5A2 = {
 			isa = PBXGroup;
 			children = (
 				9271E18A1D3E3A4F003DC5A2 /* Episode Saver */,
 				9271E1891D3E3A4F003DC5A2 /* Products */,
+				42042F91ECDA4499F9F7C7ED /* Pods */,
+				99620ADF3D22DD8FB8638C6D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +78,17 @@
 				9271E1921D3E3A4F003DC5A2 /* Assets.xcassets */,
 				9271E1941D3E3A4F003DC5A2 /* LaunchScreen.storyboard */,
 				9271E1971D3E3A4F003DC5A2 /* Info.plist */,
+				9211A2C41D3E3FA200A77BB7 /* GoogleService-Info.plist */,
 			);
 			path = "Episode Saver";
+			sourceTree = "<group>";
+		};
+		99620ADF3D22DD8FB8638C6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99EA854C1FD2C9A9B09B2F85 /* Pods_Episode_Saver.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9271E19A1D3E3A4F003DC5A2 /* Build configuration list for PBXNativeTarget "Episode Saver" */;
 			buildPhases = (
+				4F01447BC3DA16F0B4AAE863 /* [CP] Check Pods Manifest.lock */,
 				9271E1841D3E3A4F003DC5A2 /* Sources */,
 				9271E1851D3E3A4F003DC5A2 /* Frameworks */,
 				9271E1861D3E3A4F003DC5A2 /* Resources */,
+				6060122EC279343F56F56D67 /* [CP] Embed Pods Frameworks */,
+				4D257BDE926681D7CD477743 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,12 +153,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				9271E1961D3E3A4F003DC5A2 /* LaunchScreen.storyboard in Resources */,
+				9211A2C51D3E3FA200A77BB7 /* GoogleService-Info.plist in Resources */,
 				9271E1931D3E3A4F003DC5A2 /* Assets.xcassets in Resources */,
 				9271E1911D3E3A4F003DC5A2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4D257BDE926681D7CD477743 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Episode Saver/Pods-Episode Saver-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F01447BC3DA16F0B4AAE863 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6060122EC279343F56F56D67 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Episode Saver/Pods-Episode Saver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9271E1841D3E3A4F003DC5A2 /* Sources */ = {
@@ -247,6 +326,7 @@
 		};
 		9271E19B1D3E3A4F003DC5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57485F5AB8947778FDEB14F5 /* Pods-Episode Saver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Episode Saver/Info.plist";
@@ -258,6 +338,7 @@
 		};
 		9271E19C1D3E3A4F003DC5A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6E81F1A73B40F4EB7244870 /* Pods-Episode Saver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Episode Saver/Info.plist";
