@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9211A2C51D3E3FA200A77BB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9211A2C41D3E3FA200A77BB7 /* GoogleService-Info.plist */; };
+		9211A2C81D3E49E400A77BB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9211A2C71D3E49E400A77BB7 /* Constants.swift */; };
+		9211A2CA1D3E4B5400A77BB7 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9211A2C91D3E4B5400A77BB7 /* AppController.swift */; };
 		9271E18C1D3E3A4F003DC5A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271E18B1D3E3A4F003DC5A2 /* AppDelegate.swift */; };
 		9271E18E1D3E3A4F003DC5A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271E18D1D3E3A4F003DC5A2 /* ViewController.swift */; };
 		9271E1911D3E3A4F003DC5A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9271E18F1D3E3A4F003DC5A2 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		57485F5AB8947778FDEB14F5 /* Pods-Episode Saver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Episode Saver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Episode Saver/Pods-Episode Saver.debug.xcconfig"; sourceTree = "<group>"; };
 		9211A2C41D3E3FA200A77BB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9211A2C71D3E49E400A77BB7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Utils/Constants.swift; sourceTree = "<group>"; };
+		9211A2C91D3E4B5400A77BB7 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppController.swift; path = Utils/AppController.swift; sourceTree = "<group>"; };
 		9271E1881D3E3A4F003DC5A2 /* Episode Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Episode Saver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9271E18B1D3E3A4F003DC5A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9271E18D1D3E3A4F003DC5A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9211A2C61D3E49AD00A77BB7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9211A2C71D3E49E400A77BB7 /* Constants.swift */,
+				9211A2C91D3E4B5400A77BB7 /* AppController.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		9271E17F1D3E3A4E003DC5A2 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +85,7 @@
 		9271E18A1D3E3A4F003DC5A2 /* Episode Saver */ = {
 			isa = PBXGroup;
 			children = (
+				9211A2C61D3E49AD00A77BB7 /* Utils */,
 				9271E18B1D3E3A4F003DC5A2 /* AppDelegate.swift */,
 				9271E18D1D3E3A4F003DC5A2 /* ViewController.swift */,
 				9271E18F1D3E3A4F003DC5A2 /* Main.storyboard */,
@@ -216,6 +230,8 @@
 			files = (
 				9271E18E1D3E3A4F003DC5A2 /* ViewController.swift in Sources */,
 				9271E18C1D3E3A4F003DC5A2 /* AppDelegate.swift in Sources */,
+				9211A2C81D3E49E400A77BB7 /* Constants.swift in Sources */,
+				9211A2CA1D3E4B5400A77BB7 /* AppController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
