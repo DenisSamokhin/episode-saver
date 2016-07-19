@@ -12,7 +12,6 @@ pod 'Firebase/Messaging'
 pod 'Firebase/Crash'
 pod 'Firebase/Storage'
 pod 'Firebase/Auth'
-pod 'FirebaseUI/Auth', '~> 0.4'
 pod 'FirebaseUI', '~> 0.4'
 pod 'Alamofire', '~> 3.4'
 end
