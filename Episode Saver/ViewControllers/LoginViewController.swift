@@ -18,8 +18,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = true
+        self.loadMainScreenFlow();
     }
 
+    
+    // MARK: - IBActions
     @IBAction func loginButtonClicked(sender: AnyObject) {
         if (AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.emailTextField) && AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.passwordTextField)) {
             FIRAuth.auth()?.signInWithEmail(self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
@@ -27,6 +30,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print(error)
                 }else {
                     print(user)
+                    self.loadMainScreenFlow()
                 }
             })
         }
@@ -51,5 +55,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    
+    // MARK: - Logic
+    func loadMainScreenFlow() {
+        let win: UIWindow? = (UIApplication.sharedApplication().delegate?.window)!
+        win!.rootViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainNavigationController")
+        self.view.window?.makeKeyWindow()
     }
 }
