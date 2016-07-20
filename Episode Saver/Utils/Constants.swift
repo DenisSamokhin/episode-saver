@@ -9,4 +9,4 @@
 import Foundation
 
 var kTMDBApiKey: NSString! = "57a3a351b90fa8d25e14a3d9fd49bf98"
-
+var kFirebaseDatabaseURL: NSString! = "https://episode-saver.firebaseio.com/"

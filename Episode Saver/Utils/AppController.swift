@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class AppController: NSObject {
+    static let dbReference = FIRDatabase.database().reference()
     static let sharedInstance = AppController()
     private override init() {}
     
@@ -21,4 +23,5 @@ class AppController: NSObject {
             return false
         }
     }
+    
 }

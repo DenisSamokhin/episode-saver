@@ -39,6 +39,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print(error)
                 }else {
                     print(user)
+                    let postDict = NSMutableDictionary()
+                    if user!.email != nil {
+                        postDict.setObject(user!.email!, forKey: "email")
+                    }
+                    postDict.setObject(user!.uid, forKey: "userID")
+                    if user!.displayName != nil {
+                        postDict.setObject(user!.displayName!, forKey: "fullname")
+                    }
+                    AppController.dbReference.child("users").child(user!.uid).setValue(postDict)
                 }
             })
         }
