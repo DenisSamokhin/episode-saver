@@ -14,6 +14,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var showsTableView: UITableView!
     var tableViewDataSource: NSArray!
     var tmdbIDsList: NSMutableArray! = NSMutableArray()
+    var imageURLsList: NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,9 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         APILayer.sharedInstance.getTVShowsList(offset: offset, success: { (result) in
             for dict in result {
                 let showID = dict.objectForKey("themoviedb") as! NSNumber
+                let posterURL = dict.objectForKey("artwork_208x117") as! NSString
                 self.tmdbIDsList.addObject(showID.stringValue)
+                self.imageURLsList.addObject(posterURL)
             }
             self.showsTableView.reloadData()
             }, fail: { (error) in
@@ -65,6 +68,13 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AllShowsCell", forIndexPath: indexPath) as! AllShowsTableViewCell
         let showID = self.tmdbIDsList.objectAtIndex(indexPath.row) as! NSString
+        let posterURL = self.imageURLsList.objectAtIndex(indexPath.row) as! NSString
+        cell.avatarImageView.image = nil
+        cell.titleLabel.text = ""
+        cell.descriptionTextView.text = ""
+        AppController.sharedInstance.downloadImageWithURL(stringURL: posterURL) { (image) in
+            cell.avatarImageView.image = image
+        }
         self.getShowInfoByID(id: showID, completion: { (show) in
             cell.titleLabel.text = show.title as String;
             cell.descriptionTextView.text = show.showDescription as! String;
