@@ -30,32 +30,21 @@ class AppController: NSObject {
     }
     
     func fileInDocumentsDirectory(filename: String) -> String {
-        
         let fileURL = getDocumentsURL().URLByAppendingPathComponent(filename)
         return fileURL.path!
-        
     }
     
     func loadImageFromPath(path: String) -> UIImage? {
-        
         let image = UIImage(contentsOfFile: path)
-        
         if image == nil {
-            
-            print("missing image at: \(path)")
         }
-        print("Loading image from path: \(path)") // this is just for you to see the path in case you want to go to the directory, using Finder.
         return image
-        
     }
     
     func saveImage (image: UIImage, path: String ) -> Bool{
-        
         let pngImageData = UIImagePNGRepresentation(image)
         let result = pngImageData!.writeToFile(path, atomically: true)
-        
         return result
-        
     }
     
     func downloadImageWithURL(stringURL stringURL: NSString, success: (image: UIImage) -> Void) {
@@ -78,4 +67,6 @@ class AppController: NSObject {
             }
         }
     }
+    
+    
 }

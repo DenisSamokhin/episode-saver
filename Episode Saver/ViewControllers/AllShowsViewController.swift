@@ -18,6 +18,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationItem.title = "TV Shows"
         self.getShowsList()
     }
     
@@ -83,7 +84,12 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.titleLabel.text = show.title as String;
             cell.descriptionTextView.text = show.showDescription as! String;
         }) { (error) in
-            
+            self.getShowInfoByID(id: showID, completion: { (show) in
+                cell.titleLabel.text = show.title as String;
+                cell.descriptionTextView.text = show.showDescription as! String;
+            }) { (error) in
+                
+            }
         }
         if indexPath.row == self.tmdbIDsList.count - 15 {
             self.getShowsList()

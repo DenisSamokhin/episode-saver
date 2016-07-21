@@ -21,22 +21,6 @@
             </objects>
             <point key="canvasLocation" x="-383" y="141"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6pf-Pp-fGa">
-            <objects>
-                <navigationController storyboardIdentifier="MainNavigationController" id="260-b9-pwX" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f8Y-cr-3Hg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="lPa-Ig-c5K" kind="relationship" relationship="rootViewController" id="jjL-V6-tvZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6VC-yf-B1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-383" y="860"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="K04-4e-u0c">
             <objects>
@@ -211,7 +195,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UfB-Fb-XbK">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UfB-Fb-XbK">
                                                     <rect key="frame" x="5" y="5" width="70" height="70"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -244,7 +228,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="rUI-pe-ZLY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -279,7 +263,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NAs-13-kTA" firstAttribute="leading" secondItem="qna-FC-jit" secondAttribute="leading" id="X5T-yp-7Rk"/>
-                            <constraint firstItem="NAs-13-kTA" firstAttribute="top" secondItem="5ey-99-EiH" secondAttribute="bottom" constant="-100" id="cZu-Kh-QP9"/>
+                            <constraint firstItem="NAs-13-kTA" firstAttribute="top" secondItem="5ey-99-EiH" secondAttribute="bottom" constant="-54" id="cZu-Kh-QP9"/>
                             <constraint firstItem="NAs-13-kTA" firstAttribute="height" secondItem="qna-FC-jit" secondAttribute="height" constant="-10" id="gMM-1G-3V7"/>
                             <constraint firstItem="NAs-13-kTA" firstAttribute="width" secondItem="qna-FC-jit" secondAttribute="width" id="j0Z-V5-nNy"/>
                         </constraints>
@@ -297,7 +281,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="PmL-KX-Idb">
             <objects>
-                <tabBarController id="lPa-Ig-c5K" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" id="lPa-Ig-c5K" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="MIL-HW-5LL"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ydc-dc-p04">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

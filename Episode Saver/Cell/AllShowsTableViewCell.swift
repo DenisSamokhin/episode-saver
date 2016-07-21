@@ -19,7 +19,9 @@ class AllShowsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         descriptionTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
-
+        avatarImageView.backgroundColor = UIColor.yellowColor()
+        avatarImageView.layer.cornerRadius = 35
+        avatarImageView.clipsToBounds = true
     }
     
     

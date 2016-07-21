@@ -60,7 +60,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Logic
     func loadMainScreenFlow() {
         let win: UIWindow? = (UIApplication.sharedApplication().delegate?.window)!
-        win!.rootViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainNavigationController")
+        win!.rootViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainTabBarController")
         self.view.window?.makeKeyWindow()
     }
 }
