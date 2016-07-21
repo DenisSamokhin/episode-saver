@@ -9,7 +9,7 @@
 import Foundation
 
 class SeasonTMDBModel: NSObject {
-    var airDate: NSString!
+    var airDate: NSString?
     var episodeCount: NSNumber!
     var seasonID: NSNumber!
     var posterPath: NSString?
@@ -21,8 +21,8 @@ class SeasonTMDBModel: NSObject {
     
     convenience init(dictionary dict: NSDictionary!) {
         self.init()
-        self.airDate = dict.objectForKey("air_date") as! String
-        self.posterPath = dict.objectForKey("poster_path") as! String
+        self.airDate = dict.objectForKey("air_date") as? String
+        self.posterPath = dict.objectForKey("poster_path") as? String
         self.episodeCount = dict.objectForKey("episode_count") as! NSNumber
         self.seasonNumber = dict.objectForKey("season_number") as! NSNumber
         self.seasonID = dict.objectForKey("id") as! NSNumber
