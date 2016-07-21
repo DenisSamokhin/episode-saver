@@ -15,4 +15,12 @@ class AllShowsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var addButton: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        descriptionTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+    }
+    
+    
 }

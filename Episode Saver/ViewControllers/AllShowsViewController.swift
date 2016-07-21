@@ -31,20 +31,21 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         APILayer.sharedInstance.getTVShowsList(offset: offset, success: { (result) in
             for dict in result {
-                let showID = dict.objectForKey("themoviedb")
-                self.tmdbIDsList.addObject(showID!)
-                self.getShowInfoByID(id: showID!.stringValue)
+                let showID = dict.objectForKey("themoviedb") as! NSNumber
+                self.tmdbIDsList.addObject(showID.stringValue)
             }
+            self.showsTableView.reloadData()
             }, fail: { (error) in
                 
         })
     }
     
-    func getShowInfoByID(id id: NSString!) {
+    func getShowInfoByID(id id: NSString!, completion:(show: ShowTMDBModel) -> Void, fail:(error: NSError) -> Void) {
         APILayer.sharedInstance.getShowInfoByID(id: id, success: { (result) in
-            // create model for TV show and add to data source
-            }) { (error) in
-                
+            let show: ShowTMDBModel! = ShowTMDBModel.init(dictionary: result)
+            completion(show: show)
+        }) { (error) in
+            fail(error: error)
         }
     }
     
@@ -58,13 +59,19 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.tmdbIDsList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AllShowsCell", forIndexPath: indexPath) as! AllShowsTableViewCell
-        cell.titleLabel.text = "Big Bang Theory"
-        cell.descriptionTextView.text = "TV Show description"
+        let showID = self.tmdbIDsList.objectAtIndex(indexPath.row) as! NSString
+        self.getShowInfoByID(id: showID, completion: { (show) in
+            cell.titleLabel.text = show.title as String;
+            cell.descriptionTextView.text = show.showDescription as! String;
+        }) { (error) in
+            
+        }
+        
         return cell
     }
     
