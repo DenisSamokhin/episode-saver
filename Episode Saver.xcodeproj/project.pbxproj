@@ -19,6 +19,9 @@
 		9271E1931D3E3A4F003DC5A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9271E1921D3E3A4F003DC5A2 /* Assets.xcassets */; };
 		9271E1961D3E3A4F003DC5A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9271E1941D3E3A4F003DC5A2 /* LaunchScreen.storyboard */; };
 		92D3A0E61D3FA5DE006923F7 /* AllShowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D3A0E51D3FA5DE006923F7 /* AllShowsTableViewCell.swift */; };
+		92D3A0E81D40B739006923F7 /* ShowTMDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D3A0E71D40B739006923F7 /* ShowTMDBModel.swift */; };
+		92D3A0EA1D40BB9C006923F7 /* SeasonTMDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D3A0E91D40BB9C006923F7 /* SeasonTMDBModel.swift */; };
+		92D3A0EC1D40BFD0006923F7 /* GenreTMDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D3A0EB1D40BFD0006923F7 /* GenreTMDBModel.swift */; };
 		92E51D85B833DA6C4CCDF61D /* Pods_Episode_Saver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EA854C1FD2C9A9B09B2F85 /* Pods_Episode_Saver.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +41,9 @@
 		9271E1951D3E3A4F003DC5A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9271E1971D3E3A4F003DC5A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D3A0E51D3FA5DE006923F7 /* AllShowsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllShowsTableViewCell.swift; path = Cell/AllShowsTableViewCell.swift; sourceTree = "<group>"; };
+		92D3A0E71D40B739006923F7 /* ShowTMDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowTMDBModel.swift; path = Models/ShowTMDBModel.swift; sourceTree = "<group>"; };
+		92D3A0E91D40BB9C006923F7 /* SeasonTMDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeasonTMDBModel.swift; path = Models/SeasonTMDBModel.swift; sourceTree = "<group>"; };
+		92D3A0EB1D40BFD0006923F7 /* GenreTMDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenreTMDBModel.swift; path = Models/GenreTMDBModel.swift; sourceTree = "<group>"; };
 		99EA854C1FD2C9A9B09B2F85 /* Pods_Episode_Saver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Episode_Saver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E81F1A73B40F4EB7244870 /* Pods-Episode Saver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Episode Saver.release.xcconfig"; path = "Pods/Target Support Files/Pods-Episode Saver/Pods-Episode Saver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +92,9 @@
 			isa = PBXGroup;
 			children = (
 				9211A2D11D3F82F600A77BB7 /* ProfileModel.swift */,
+				92D3A0E71D40B739006923F7 /* ShowTMDBModel.swift */,
+				92D3A0E91D40BB9C006923F7 /* SeasonTMDBModel.swift */,
+				92D3A0EB1D40BFD0006923F7 /* GenreTMDBModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -266,7 +275,10 @@
 			files = (
 				9211A2D41D3F8F4900A77BB7 /* AllShowsViewController.swift in Sources */,
 				9211A2CC1D3E619B00A77BB7 /* APILayer.swift in Sources */,
+				92D3A0E81D40B739006923F7 /* ShowTMDBModel.swift in Sources */,
+				92D3A0EA1D40BB9C006923F7 /* SeasonTMDBModel.swift in Sources */,
 				9271E18C1D3E3A4F003DC5A2 /* AppDelegate.swift in Sources */,
+				92D3A0EC1D40BFD0006923F7 /* GenreTMDBModel.swift in Sources */,
 				9211A2C81D3E49E400A77BB7 /* Constants.swift in Sources */,
 				9211A2D21D3F82F600A77BB7 /* ProfileModel.swift in Sources */,
 				9211A2CE1D3E633D00A77BB7 /* LoginViewController.swift in Sources */,

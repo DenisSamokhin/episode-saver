@@ -14,10 +14,15 @@ class ProfileModel: NSObject {
     var email : NSString!
     var avatarURL : NSString?
     
-    func initWithDictionary(dictionary dict: NSDictionary!) {
-        userID = dict.objectForKey("userID") as! String
-        fullname = dict.objectForKey("fullname") as! String
-        email = dict.objectForKey("email") as! String
-        avatarURL = dict.objectForKey("avatarURL") as! String
+    override required init() {
+        super.init()
+    }
+    
+    convenience init(dictionary dict: NSDictionary!) {
+        self.init()
+        self.userID = dict.objectForKey("userID") as! String
+        self.fullname = dict.objectForKey("fullname") as! String
+        self.email = dict.objectForKey("email") as! String
+        self.avatarURL = dict.objectForKey("avatarURL") as! String
     }
 }
