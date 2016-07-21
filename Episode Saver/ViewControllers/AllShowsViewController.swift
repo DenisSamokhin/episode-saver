@@ -25,18 +25,22 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func getShowsList() {
         var offset: NSString
-        if tableViewDataSource != nil && tableViewDataSource.count > 0 {
-            offset = "\(tableViewDataSource.count)"
+        if self.tmdbIDsList != nil && self.tmdbIDsList.count > 0 {
+            offset = "\(self.tmdbIDsList.count)"
         }else {
             offset = "0"
         }
         APILayer.sharedInstance.getTVShowsList(offset: offset, success: { (result) in
+            let tempArr = NSMutableArray()
+            let tempImagesArray = NSMutableArray()
             for dict in result {
                 let showID = dict.objectForKey("themoviedb") as! NSNumber
                 let posterURL = dict.objectForKey("artwork_208x117") as! NSString
-                self.tmdbIDsList.addObject(showID.stringValue)
-                self.imageURLsList.addObject(posterURL)
+                tempArr.addObject(showID.stringValue)
+                tempImagesArray.addObject(posterURL)
             }
+            self.tmdbIDsList.addObjectsFromArray(tempArr as [AnyObject])
+            self.imageURLsList.addObjectsFromArray(tempImagesArray as [AnyObject])
             self.showsTableView.reloadData()
             }, fail: { (error) in
                 
@@ -81,7 +85,9 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         }) { (error) in
             
         }
-        
+        if indexPath.row == self.tmdbIDsList.count - 15 {
+            self.getShowsList()
+        }
         return cell
     }
     
