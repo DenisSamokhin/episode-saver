@@ -15,6 +15,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     var tableViewDataSource: NSArray!
     var tmdbIDsList: NSMutableArray! = NSMutableArray()
     var imageURLsList: NSMutableArray! = NSMutableArray()
+    var showsList: NSMutableDictionary! = NSMutableDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +62,11 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - IBActions
     
     @IBAction func addButtonClicked(sender: AnyObject) {
-        
+        let button = sender as! UIButton
+        let point = button.convertPoint(CGPointZero, toView: self.showsTableView)
+        let indexPath = self.showsTableView.indexPathForRowAtPoint(point)
+        let showID = self.tmdbIDsList.objectAtIndex((indexPath?.row)!)
+        let showModel = self.showsList.objectForKey(showID)
     }
     
     // MARK: - UITableView
@@ -81,10 +86,12 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.avatarImageView.image = image
         }
         self.getShowInfoByID(id: showID, completion: { (show) in
+            self.showsList.setObject(show, forKey: showID)
             cell.titleLabel.text = show.title as String;
             cell.descriptionTextView.text = show.showDescription as! String;
         }) { (error) in
             self.getShowInfoByID(id: showID, completion: { (show) in
+                self.showsList.setObject(show, forKey: showID)
                 cell.titleLabel.text = show.title as String;
                 cell.descriptionTextView.text = show.showDescription as! String;
             }) { (error) in
@@ -95,6 +102,16 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
             self.getShowsList()
         }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let showID = self.tmdbIDsList.objectAtIndex(indexPath.row)
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! AllShowsTableViewCell
+        let showModel = self.showsList.objectForKey(showID) as! ShowTMDBModel
+        let showDetailsVC = self.storyboard?.instantiateViewControllerWithIdentifier("ShowDetailsVC") as! ShowDetailsViewController
+        showDetailsVC.currentShow = showModel
+        showDetailsVC.iconImage = cell.avatarImageView.image
+        self.navigationController?.pushViewController(showDetailsVC, animated: true)
     }
     
 }
