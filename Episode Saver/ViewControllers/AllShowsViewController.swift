@@ -37,7 +37,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
             let tempImagesArray = NSMutableArray()
             for dict in result {
                 let showID = dict.objectForKey("themoviedb") as! NSNumber
-                let posterURL = dict.objectForKey("artwork_208x117") as! NSString
+                let posterURL = dict.objectForKey("artwork_448x252") as! NSString
                 tempArr.addObject(showID.stringValue)
                 tempImagesArray.addObject(posterURL)
             }
@@ -75,30 +75,32 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         return self.tmdbIDsList.count
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return self.view.frame.size.width / 1.77777778 + 60
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AllShowsCell", forIndexPath: indexPath) as! AllShowsTableViewCell
+        cell.selectionStyle = .None
         let showID = self.tmdbIDsList.objectAtIndex(indexPath.row) as! NSString
         let posterURL = self.imageURLsList.objectAtIndex(indexPath.row) as! NSString
         cell.avatarImageView.image = nil
         cell.titleLabel.text = ""
-        cell.descriptionTextView.text = ""
         AppController.sharedInstance.downloadImageWithURL(stringURL: posterURL) { (image) in
             cell.avatarImageView.image = image
         }
         self.getShowInfoByID(id: showID, completion: { (show) in
             self.showsList.setObject(show, forKey: showID)
             cell.titleLabel.text = show.title as String;
-            cell.descriptionTextView.text = show.showDescription as! String;
         }) { (error) in
             self.getShowInfoByID(id: showID, completion: { (show) in
                 self.showsList.setObject(show, forKey: showID)
                 cell.titleLabel.text = show.title as String;
-                cell.descriptionTextView.text = show.showDescription as! String;
             }) { (error) in
                 
             }
         }
-        if indexPath.row == self.tmdbIDsList.count - 15 {
+        if indexPath.row == self.tmdbIDsList.count - 10 {
             self.getShowsList()
         }
         return cell
@@ -108,10 +110,10 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         let showID = self.tmdbIDsList.objectAtIndex(indexPath.row)
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! AllShowsTableViewCell
         let showModel = self.showsList.objectForKey(showID) as! ShowTMDBModel
-        let showDetailsVC = self.storyboard?.instantiateViewControllerWithIdentifier("ShowDetailsVC") as! ShowDetailsViewController
+        let showDetailsVC = self.storyboard!.instantiateViewControllerWithIdentifier("ShowDetailsVC") as! ShowDetailsViewController
         showDetailsVC.currentShow = showModel
         showDetailsVC.iconImage = cell.avatarImageView.image
-        self.navigationController?.pushViewController(showDetailsVC, animated: true)
+        self.navigationController!.pushViewController(showDetailsVC, animated: true)
     }
     
 }

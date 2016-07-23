@@ -11,6 +11,7 @@ import UIKit
 
 class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var topContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var descriptionContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var contentVIewHeightConstraint: NSLayoutConstraint!
@@ -20,7 +21,7 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var bottomContainerView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var descriptionContainerView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: ShowDetailsTitleLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var topContainerView: UIView!
     var currentShow: ShowTMDBModel!
@@ -34,17 +35,16 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
     func initUI() {
         self.title = "TV Show Details"
         self.contentViewWidthConstraint.constant = self.view.frame.size.width
+        self.topContainerHeightConstraint.constant = self.view.frame.size.width / 1.77777778 + 60;
         //self.contentView.backgroundColor = UIColor.greenColor()
         self.topContainerView.backgroundColor = UIColor.clearColor()
         self.descriptionContainerView.backgroundColor = UIColor.clearColor()
         self.avatarImageView.image = iconImage
-        self.avatarImageView.layer.cornerRadius = 45
-        self.avatarImageView.clipsToBounds = true
         let labelNameString = NSMutableAttributedString(string:"Title", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : UIColor .grayColor()])
         let titleString = NSMutableAttributedString(string:"\n\(currentShow.title)", attributes:[NSFontAttributeName : UIFont.boldSystemFontOfSize(22.0)])
         labelNameString.appendAttributedString(titleString)
         self.titleLabel.attributedText = labelNameString;
-        
+
         let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : UIColor .grayColor()])
         let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(14.0)])
         labelDescriptionString.appendAttributedString(descriptionString)
