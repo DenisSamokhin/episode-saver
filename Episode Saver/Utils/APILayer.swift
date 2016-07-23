@@ -16,7 +16,7 @@ class APILayer: NSObject {
     func getTVShowsList(offset offset: NSString, success: (result: NSArray) -> Void, fail: (error: NSError) -> Void) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             Alamofire.request(.GET,
-                "https://api-public.guidebox.com/v1.43/US/JMjLR7KJH7DJiDCMoUxvsf4xjLHnLW/shows/all/\(offset)/20/all/all",
+                "https://api-public.guidebox.com/v1.43/US/\(kGuideBoxProductionAPIKey)/shows/all/\(offset)/20/all/all",
                 parameters: nil,
                 encoding: .URL,
                 headers: nil)

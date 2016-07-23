@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import DynamicButton
 
 class AllShowsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -43,9 +44,10 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
             }
             self.tmdbIDsList.addObjectsFromArray(tempArr as [AnyObject])
             self.imageURLsList.addObjectsFromArray(tempImagesArray as [AnyObject])
+            print("Data loaded")
             self.showsTableView.reloadData()
             }, fail: { (error) in
-                
+                print(error)
         })
     }
     
@@ -62,7 +64,13 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - IBActions
     
     @IBAction func addButtonClicked(sender: AnyObject) {
-        let button = sender as! UIButton
+        let button: DynamicButton! = sender as! DynamicButton
+        if button.style == DynamicButtonStyle.Plus {
+            // Add to list
+            button.setStyle(DynamicButtonStyleClose.self, animated: true)
+        }else if button.style == DynamicButtonStyle.Close {
+            button.setStyle(DynamicButtonStylePlus.self, animated: true)
+        }
         let point = button.convertPoint(CGPointZero, toView: self.showsTableView)
         let indexPath = self.showsTableView.indexPathForRowAtPoint(point)
         let showID = self.tmdbIDsList.objectAtIndex((indexPath?.row)!)

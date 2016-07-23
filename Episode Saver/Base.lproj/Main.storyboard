@@ -196,27 +196,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UfB-Fb-XbK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="337"/>
-                                                    <color key="backgroundColor" red="0.94244791666666672" green="0.94244791666666672" blue="0.94244791666666672" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="UfB-Fb-XbK" secondAttribute="height" multiplier="448:252" id="Wyr-oo-qLm"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHH-Zd-cq4">
-                                                    <rect key="frame" x="270" y="307" width="61" height="30"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="79P-3n-TQ3"/>
-                                                        <constraint firstAttribute="height" constant="30" id="G5k-MJ-cmI"/>
-                                                    </constraints>
-                                                    <state key="normal" title="+">
-                                                        <color key="titleColor" red="1" green="0.21586476930000001" blue="0.22858012759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="addButtonClicked:" destination="0zI-h7-Vaj" eventType="touchUpInside" id="zeC-gL-7h8"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeK-4c-s52">
                                                     <rect key="frame" x="8" y="340" width="584" height="60"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -226,23 +205,72 @@
                                                     <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UfB-Fb-XbK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="337"/>
+                                                    <color key="backgroundColor" red="0.94244791666666672" green="0.94244791666666672" blue="0.94244791666666672" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="UfB-Fb-XbK" secondAttribute="height" multiplier="448:252" id="Wyr-oo-qLm"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNm-b3-jda">
+                                                    <rect key="frame" x="280" y="317" width="40" height="40"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHH-Zd-cq4" customClass="DynamicButton" customModule="DynamicButton">
+                                                            <rect key="frame" x="-1" y="8" width="41" height="25"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="79P-3n-TQ3"/>
+                                                                <constraint firstAttribute="height" constant="40" id="G5k-MJ-cmI"/>
+                                                            </constraints>
+                                                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <state key="normal">
+                                                                <color key="titleColor" red="1" green="0.21586476930000001" blue="0.22858012759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                                    <color key="value" red="1" green="0.21586476930000001" blue="0.22858012759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightStokeColor">
+                                                                    <color key="value" red="0.021874999999999999" green="0.021874999999999999" blue="0.021874999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightBackgroundColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="addButtonClicked:" destination="0zI-h7-Vaj" eventType="touchUpInside" id="zeC-gL-7h8"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="VB2-jk-OwW"/>
+                                                        <constraint firstAttribute="height" constant="40" id="eCs-xM-wNk"/>
+                                                        <constraint firstItem="iHH-Zd-cq4" firstAttribute="centerY" secondItem="jNm-b3-jda" secondAttribute="centerY" id="kH3-yK-alC"/>
+                                                        <constraint firstItem="iHH-Zd-cq4" firstAttribute="centerX" secondItem="jNm-b3-jda" secondAttribute="centerX" id="r1Y-WJ-U7D"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="UfB-Fb-XbK" firstAttribute="leading" secondItem="EQR-M6-uZT" secondAttribute="leading" id="78Z-OP-tEH"/>
-                                                <constraint firstItem="EeK-4c-s52" firstAttribute="top" secondItem="UfB-Fb-XbK" secondAttribute="bottom" id="9dy-hB-kCq"/>
+                                                <constraint firstItem="EeK-4c-s52" firstAttribute="top" secondItem="UfB-Fb-XbK" secondAttribute="bottom" constant="10" id="9dy-hB-kCq"/>
                                                 <constraint firstItem="EeK-4c-s52" firstAttribute="leading" secondItem="EQR-M6-uZT" secondAttribute="leading" constant="5" id="Fwb-K0-R7G"/>
+                                                <constraint firstItem="jNm-b3-jda" firstAttribute="bottom" secondItem="UfB-Fb-XbK" secondAttribute="bottom" constant="20" id="ZeW-Gy-wlN"/>
                                                 <constraint firstItem="UfB-Fb-XbK" firstAttribute="top" secondItem="EQR-M6-uZT" secondAttribute="top" id="avF-Rv-r1W"/>
                                                 <constraint firstAttribute="bottom" secondItem="EeK-4c-s52" secondAttribute="bottom" id="eau-Sj-BTM"/>
+                                                <constraint firstItem="jNm-b3-jda" firstAttribute="centerX" secondItem="EQR-M6-uZT" secondAttribute="centerX" id="fgp-cO-PQd"/>
                                                 <constraint firstAttribute="trailing" secondItem="UfB-Fb-XbK" secondAttribute="trailing" id="gsX-yI-388"/>
                                                 <constraint firstAttribute="trailing" secondItem="EeK-4c-s52" secondAttribute="trailing" constant="5" id="lcy-wO-Jaq"/>
-                                                <constraint firstItem="EeK-4c-s52" firstAttribute="top" secondItem="iHH-Zd-cq4" secondAttribute="bottom" id="smG-2V-c7K"/>
-                                                <constraint firstItem="iHH-Zd-cq4" firstAttribute="centerX" secondItem="EQR-M6-uZT" secondAttribute="centerX" id="uFI-IJ-gcw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addButton" destination="iHH-Zd-cq4" id="Sk7-m5-20T"/>
                                             <outlet property="avatarImageView" destination="UfB-Fb-XbK" id="BB9-oc-09d"/>
+                                            <outlet property="buttonBackgroundView" destination="jNm-b3-jda" id="9HD-CZ-Qdf"/>
                                             <outlet property="titleLabel" destination="EeK-4c-s52" id="zAT-ya-Car"/>
                                         </connections>
                                     </tableViewCell>

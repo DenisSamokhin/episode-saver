@@ -69,7 +69,8 @@ class AppController: NSObject {
     }
     
     func setMaskToView(view view: UIView, byRoundingCorners corners: UIRectCorner) {
-        let rounded : UIBezierPath = UIBezierPath.init(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSizeMake(15, 15))
+        let radius: CGFloat = view.frame.size.width / 2
+        let rounded : UIBezierPath = UIBezierPath.init(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSizeMake(radius, radius))
         let shape: CAShapeLayer = CAShapeLayer.init()
         shape.path = rounded.CGPath
         view.layer.mask = shape
