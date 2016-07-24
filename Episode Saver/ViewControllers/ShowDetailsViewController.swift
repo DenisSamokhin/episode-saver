@@ -45,13 +45,19 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
         labelNameString.appendAttributedString(titleString)
         self.titleLabel.attributedText = labelNameString;
 
-        let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : UIColor .grayColor()])
-        let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(14.0)])
+        let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.boldSystemFontOfSize(17.0), NSForegroundColorAttributeName : UIColor .init(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)])
+        let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(17.0)])
         labelDescriptionString.appendAttributedString(descriptionString)
         self.descriptionTextView.attributedText = labelDescriptionString;
-        let width: CGFloat = self.view.frame.size.width - 30
+        print(descriptionString)
+        self.view.layoutIfNeeded()
+        let width: CGFloat = self.descriptionTextView.frame.size.width
         let resultRect = labelDescriptionString.boundingRectWithSize(CGSizeMake(width, CGFloat.max), options: [.UsesLineFragmentOrigin, .UsesFontLeading], context: nil)
-        self.descriptionContainerHeight.constant = resultRect.size.height + 20;
+        self.descriptionContainerHeight.constant = resultRect.size.height + self.descriptionTextView.frame.origin.y + 20;
+        self.view.layoutIfNeeded()
+        self.contentVIewHeightConstraint.constant = self.descriptionContainerView.frame.origin.y + self.descriptionContainerView.frame.size.height
+        self.view.layoutIfNeeded()
+        self.mainScrollView.contentSize = self.contentView.frame.size
     }
     
 }
