@@ -11,6 +11,8 @@ import UIKit
 
 class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var topContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var descriptionContainerHeight: NSLayoutConstraint!
@@ -44,7 +46,21 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
         let titleString = NSMutableAttributedString(string:"\n\(currentShow.title)", attributes:[NSFontAttributeName : UIFont.boldSystemFontOfSize(22.0)])
         labelNameString.appendAttributedString(titleString)
         self.titleLabel.attributedText = labelNameString;
-
+        self.yearLabel.text = self.currentShow.firstAirDate.componentsSeparatedByString("-").first
+        let genresArray: NSArray! = self.currentShow.genres
+        var genresString: NSString! = ""
+        for (index, element) in genresArray.enumerate() {
+            let obj: GenreTMDBModel = element as! GenreTMDBModel
+            if genresArray.count == 1 {
+                genresString = obj.name
+            }else if genresArray.count > 1 {
+                genresString = genresString.stringByAppendingString("\(obj.name), ")
+                if index == genresArray.count-1 {
+                    genresString = genresString.substringToIndex(genresString.length-2)
+                }
+            }
+        }
+        self.genreLabel.text = genresString as String
         let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.boldSystemFontOfSize(17.0), NSForegroundColorAttributeName : UIColor .init(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)])
         let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(17.0)])
         labelDescriptionString.appendAttributedString(descriptionString)
