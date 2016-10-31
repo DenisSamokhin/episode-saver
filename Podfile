@@ -6,5 +6,14 @@ target 'Episode Saver' do
   use_frameworks!
 
   # Pods for Episode Saver
-
+  pod 'Firebase'
+  pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Crash'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
+  pod 'FirebaseUI'
+  pod 'Alamofire', '~> 4.0'
+  pod 'DynamicButton', '~> 3.0'
+  pod 'HCSStarRatingView'
 end
