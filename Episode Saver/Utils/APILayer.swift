@@ -11,10 +11,10 @@ import Alamofire
 
 class APILayer: NSObject {
     static let sharedInstance = APILayer()
-    private override init() {}
+    fileprivate override init() {}
     
-    func getTVShowsList(offset offset: NSString, success: (result: NSArray) -> Void, fail: (error: NSError) -> Void) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    func getTVShowsList(offset: NSString, success: @escaping (_ result: NSArray) -> Void, fail: @escaping (_ error: NSError) -> Void) {
+        dispatch_get_global_queue(DispatchQueue.GlobalQueuePriority.default, 0).async {
             Alamofire.request(.GET,
                 "https://api-public.guidebox.com/v1.43/US/\(kGuideBoxProductionAPIKey)/shows/all/\(offset)/20/all/all",
                 parameters: nil,
@@ -41,8 +41,8 @@ class APILayer: NSObject {
     
     // MARK: - TheMovieDB API
     
-    func getShowInfoByID(id id: NSString!, success: (result: NSDictionary) -> Void, fail: (error: NSError) -> Void) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    func getShowInfoByID(id: NSString!, success: @escaping (_ result: NSDictionary) -> Void, fail: @escaping (_ error: NSError) -> Void) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             let url = "\(kTheMovieDBBaseURL)\(kTVEndpoint)\(id)"
             Alamofire.request(.GET,
                 url,

@@ -17,13 +17,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         self.loadMainScreenFlow();
     }
 
     
     // MARK: - IBActions
-    @IBAction func loginButtonClicked(sender: AnyObject) {
+    @IBAction func loginButtonClicked(_ sender: AnyObject) {
         if (AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.emailTextField) && AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.passwordTextField)) {
             FIRAuth.auth()?.signInWithEmail(self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
                 if (error != nil) {
@@ -36,7 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    @IBAction func signUpButtonClicked(sender: AnyObject) {
+    @IBAction func signUpButtonClicked(_ sender: AnyObject) {
         if (AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.emailTextField) && AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.passwordTextField)) {
             FIRAuth.auth()?.createUserWithEmail(self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
                 if (error != nil) {
@@ -59,8 +59,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Logic
     func loadMainScreenFlow() {
-        let win: UIWindow? = (UIApplication.sharedApplication().delegate?.window)!
-        win!.rootViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainTabBarController")
-        self.view.window?.makeKeyWindow()
+        let win: UIWindow? = (UIApplication.shared.delegate?.window)!
+        win!.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainTabBarController")
+        self.view.window?.makeKey()
     }
 }

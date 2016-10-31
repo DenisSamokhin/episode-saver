@@ -30,32 +30,32 @@ class ShowTMDBModel: NSObject {
     
     convenience init(dictionary dict: NSDictionary!) {
         self.init()
-        self.firstAirDate = dict.objectForKey("first_air_date") as! String
-        self.showID = dict.objectForKey("id") as! NSNumber
-        self.showHomePageURL = dict.objectForKey("homepage") as! String
-        self.lastAirDate = dict.objectForKey("last_air_date") as! String
-        self.title = dict.objectForKey("original_name") as! String
-        self.totalEpisodesNumber = dict.objectForKey("number_of_episodes") as! NSNumber
-        self.seasonsNumber = dict.objectForKey("number_of_seasons") as! NSNumber
-        self.showDescription = dict.objectForKey("overview") as! String
-        self.posterPath = dict.objectForKey("poster_path") as! String
-        self.popularity = dict.objectForKey("popularity") as! NSNumber
-        self.rating = dict.objectForKey("vote_average") as! NSNumber
-        self.status = dict.objectForKey("status") as! String
+        self.firstAirDate = dict.object(forKey: "first_air_date") as! String as NSString!
+        self.showID = dict.object(forKey: "id") as! NSNumber
+        self.showHomePageURL = dict.object(forKey: "homepage") as! String as NSString?
+        self.lastAirDate = dict.object(forKey: "last_air_date") as! String as NSString?
+        self.title = dict.object(forKey: "original_name") as! String as NSString!
+        self.totalEpisodesNumber = dict.object(forKey: "number_of_episodes") as! NSNumber
+        self.seasonsNumber = dict.object(forKey: "number_of_seasons") as! NSNumber
+        self.showDescription = dict.object(forKey: "overview") as! String as NSString?
+        self.posterPath = dict.object(forKey: "poster_path") as! String as NSString?
+        self.popularity = dict.object(forKey: "popularity") as! NSNumber
+        self.rating = dict.object(forKey: "vote_average") as! NSNumber
+        self.status = dict.object(forKey: "status") as! String as NSString!
         // Parse seasons
-        let tempArray = dict.objectForKey("seasons") as! NSArray
+        let tempArray = dict.object(forKey: "seasons") as! NSArray
         let resultArray = NSMutableArray()
         for s in tempArray {
             let season: SeasonTMDBModel = SeasonTMDBModel.init(dictionary: s as! NSDictionary)
-            resultArray.addObject(season)
+            resultArray.add(season)
         }
         self.seasons = NSArray.init(array: resultArray)
         // Parse genres
-        let genreArr = dict.objectForKey("genres") as! NSArray
+        let genreArr = dict.object(forKey: "genres") as! NSArray
         let genresResultArray = NSMutableArray()
         for g in genreArr {
             let genre: GenreTMDBModel = GenreTMDBModel.init(dictionary: g as! NSDictionary)
-            genresResultArray.addObject(genre)
+            genresResultArray.add(genre)
         }
         self.genres = NSArray.init(array: genresResultArray)
     }

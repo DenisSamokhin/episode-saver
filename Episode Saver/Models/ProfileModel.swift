@@ -20,9 +20,9 @@ class ProfileModel: NSObject {
     
     convenience init(dictionary dict: NSDictionary!) {
         self.init()
-        self.userID = dict.objectForKey("userID") as! String
-        self.fullname = dict.objectForKey("fullname") as! String
-        self.email = dict.objectForKey("email") as! String
-        self.avatarURL = dict.objectForKey("avatarURL") as! String
+        self.userID = dict.object(forKey: "userID") as! String as NSString!
+        self.fullname = dict.object(forKey: "fullname") as! String as NSString!
+        self.email = dict.object(forKey: "email") as! String as NSString!
+        self.avatarURL = dict.object(forKey: "avatarURL") as! String as NSString?
     }
 }

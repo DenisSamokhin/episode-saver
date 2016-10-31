@@ -29,7 +29,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     func getShowsList() {
         var offset: NSString
         if self.tmdbIDsList != nil && self.tmdbIDsList.count > 0 {
-            offset = "\(self.tmdbIDsList.count)"
+            offset = "\(self.tmdbIDsList.count)" as NSString
         }else {
             offset = "0"
         }
@@ -37,13 +37,13 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
             let tempArr = NSMutableArray()
             let tempImagesArray = NSMutableArray()
             for dict in result {
-                let showID = dict.objectForKey("themoviedb") as! NSNumber
-                let posterURL = dict.objectForKey("artwork_448x252") as! NSString
-                tempArr.addObject(showID.stringValue)
-                tempImagesArray.addObject(posterURL)
+                let showID = (dict as AnyObject).object(forKey: "themoviedb") as! NSNumber
+                let posterURL = (dict as AnyObject).object(forKey: "artwork_448x252") as! NSString
+                tempArr.add(showID.stringValue)
+                tempImagesArray.add(posterURL)
             }
-            self.tmdbIDsList.addObjectsFromArray(tempArr as [AnyObject])
-            self.imageURLsList.addObjectsFromArray(tempImagesArray as [AnyObject])
+            self.tmdbIDsList.addObjects(from: tempArr as [AnyObject])
+            self.imageURLsList.addObjects(from: tempImagesArray as [AnyObject])
             print("Data loaded")
             self.showsTableView.reloadData()
             }, fail: { (error) in
@@ -51,19 +51,19 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
     
-    func getShowInfoByID(id id: NSString!, completion:(show: ShowTMDBModel) -> Void, fail:(error: NSError) -> Void) {
+    func getShowInfoByID(id: NSString!, completion:(_ show: ShowTMDBModel) -> Void, fail:@escaping (_ error: NSError) -> Void) {
         APILayer.sharedInstance.getShowInfoByID(id: id, success: { (result) in
             let show: ShowTMDBModel! = ShowTMDBModel.init(dictionary: result)
-            completion(show: show)
+            completion(show)
         }) { (error) in
-            fail(error: error)
+            fail(error)
         }
     }
     
     
     // MARK: - IBActions
     
-    @IBAction func addButtonClicked(sender: AnyObject) {
+    @IBAction func addButtonClicked(_ sender: AnyObject) {
         let button: DynamicButton! = sender as! DynamicButton
         if button.style == DynamicButtonStyle.Plus {
             // Add to list
@@ -71,7 +71,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         }else if button.style == DynamicButtonStyle.Close {
             button.setStyle(DynamicButtonStylePlus.self, animated: true)
         }
-        let point = button.convertPoint(CGPointZero, toView: self.showsTableView)
+        let point = button.convertPoint(CGPoint.zero, toView: self.showsTableView)
         let indexPath = self.showsTableView.indexPathForRowAtPoint(point)
         let showID = self.tmdbIDsList.objectAtIndex((indexPath?.row)!)
         let showModel = self.showsList.objectForKey(showID)
@@ -79,19 +79,19 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: - UITableView
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tmdbIDsList.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.size.width / 1.77777778 + 60
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AllShowsCell", forIndexPath: indexPath) as! AllShowsTableViewCell
-        cell.selectionStyle = .None
-        let showID = self.tmdbIDsList.objectAtIndex(indexPath.row) as! NSString
-        let posterURL = self.imageURLsList.objectAtIndex(indexPath.row) as! NSString
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AllShowsCell", for: indexPath) as! AllShowsTableViewCell
+        cell.selectionStyle = .none
+        let showID = self.tmdbIDsList.object(at: (indexPath as NSIndexPath).row) as! NSString
+        let posterURL = self.imageURLsList.object(at: (indexPath as NSIndexPath).row) as! NSString
         cell.avatarImageView.image = nil
         cell.titleLabel.text = ""
         AppController.sharedInstance.downloadImageWithURL(stringURL: posterURL) { (image) in
@@ -108,17 +108,17 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
                 
             }
         }
-        if indexPath.row == self.tmdbIDsList.count - 10 {
+        if (indexPath as NSIndexPath).row == self.tmdbIDsList.count - 10 {
             self.getShowsList()
         }
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let showID = self.tmdbIDsList.objectAtIndex(indexPath.row)
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! AllShowsTableViewCell
-        let showModel = self.showsList.objectForKey(showID) as! ShowTMDBModel
-        let showDetailsVC = self.storyboard!.instantiateViewControllerWithIdentifier("ShowDetailsVC") as! ShowDetailsViewController
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let showID = self.tmdbIDsList.object(at: (indexPath as NSIndexPath).row)
+        let cell = tableView.cellForRow(at: indexPath) as! AllShowsTableViewCell
+        let showModel = self.showsList.object(forKey: showID) as! ShowTMDBModel
+        let showDetailsVC = self.storyboard!.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
         showDetailsVC.currentShow = showModel
         showDetailsVC.iconImage = cell.avatarImageView.image
         self.navigationController!.pushViewController(showDetailsVC, animated: true)

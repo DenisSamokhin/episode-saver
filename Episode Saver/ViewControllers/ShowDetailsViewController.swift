@@ -39,36 +39,36 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
         self.contentViewWidthConstraint.constant = self.view.frame.size.width
         self.topContainerHeightConstraint.constant = self.view.frame.size.width / 1.77777778 + 60;
         //self.contentView.backgroundColor = UIColor.greenColor()
-        self.topContainerView.backgroundColor = UIColor.clearColor()
-        self.descriptionContainerView.backgroundColor = UIColor.clearColor()
+        self.topContainerView.backgroundColor = UIColor.clear
+        self.descriptionContainerView.backgroundColor = UIColor.clear
         self.avatarImageView.image = iconImage
-        let labelNameString = NSMutableAttributedString(string:"Title", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(12.0), NSForegroundColorAttributeName : UIColor .grayColor()])
-        let titleString = NSMutableAttributedString(string:"\n\(currentShow.title)", attributes:[NSFontAttributeName : UIFont.boldSystemFontOfSize(22.0)])
-        labelNameString.appendAttributedString(titleString)
+        let labelNameString = NSMutableAttributedString(string:"Title", attributes:[NSFontAttributeName : UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : UIColor.gray])
+        let titleString = NSMutableAttributedString(string:"\n\(currentShow.title)", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 22.0)])
+        labelNameString.append(titleString)
         self.titleLabel.attributedText = labelNameString;
-        self.yearLabel.text = self.currentShow.firstAirDate.componentsSeparatedByString("-").first
+        self.yearLabel.text = self.currentShow.firstAirDate.components(separatedBy: "-").first
         let genresArray: NSArray! = self.currentShow.genres
         var genresString: NSString! = ""
-        for (index, element) in genresArray.enumerate() {
+        for (index, element) in genresArray.enumerated() {
             let obj: GenreTMDBModel = element as! GenreTMDBModel
             if genresArray.count == 1 {
                 genresString = obj.name
             }else if genresArray.count > 1 {
-                genresString = genresString.stringByAppendingString("\(obj.name), ")
+                genresString = genresString.appending("\(obj.name), ") as NSString!
                 if index == genresArray.count-1 {
-                    genresString = genresString.substringToIndex(genresString.length-2)
+                    genresString = genresString.substring(to: genresString.length-2) as NSString!
                 }
             }
         }
         self.genreLabel.text = genresString as String
-        let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.boldSystemFontOfSize(17.0), NSForegroundColorAttributeName : UIColor .init(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)])
-        let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(17.0)])
-        labelDescriptionString.appendAttributedString(descriptionString)
+        let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0), NSForegroundColorAttributeName : UIColor .init(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)])
+        let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFont(ofSize: 17.0)])
+        labelDescriptionString.append(descriptionString)
         self.descriptionTextView.attributedText = labelDescriptionString;
         print(descriptionString)
         self.view.layoutIfNeeded()
         let width: CGFloat = self.descriptionTextView.frame.size.width
-        let resultRect = labelDescriptionString.boundingRectWithSize(CGSizeMake(width, CGFloat.max), options: [.UsesLineFragmentOrigin, .UsesFontLeading], context: nil)
+        let resultRect = labelDescriptionString.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
         self.descriptionContainerHeight.constant = resultRect.size.height + self.descriptionTextView.frame.origin.y + 20;
         self.view.layoutIfNeeded()
         self.contentVIewHeightConstraint.constant = self.descriptionContainerView.frame.origin.y + self.descriptionContainerView.frame.size.height

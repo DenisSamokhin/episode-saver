@@ -21,10 +21,10 @@ class SeasonTMDBModel: NSObject {
     
     convenience init(dictionary dict: NSDictionary!) {
         self.init()
-        self.airDate = dict.objectForKey("air_date") as? String
-        self.posterPath = dict.objectForKey("poster_path") as? String
-        self.episodeCount = dict.objectForKey("episode_count") as! NSNumber
-        self.seasonNumber = dict.objectForKey("season_number") as! NSNumber
-        self.seasonID = dict.objectForKey("id") as! NSNumber
+        self.airDate = dict.object(forKey: "air_date") as? String as NSString?
+        self.posterPath = dict.object(forKey: "poster_path") as? String as NSString?
+        self.episodeCount = dict.object(forKey: "episode_count") as! NSNumber
+        self.seasonNumber = dict.object(forKey: "season_number") as! NSNumber
+        self.seasonID = dict.object(forKey: "id") as! NSNumber
     }
 }

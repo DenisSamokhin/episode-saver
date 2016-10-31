@@ -18,7 +18,7 @@ class GenreTMDBModel: NSObject {
     
     convenience init(dictionary dict: NSDictionary!) {
         self.init()
-        self.name = dict.objectForKey("name") as! String
-        self.genreID = dict.objectForKey("id") as! NSNumber
+        self.name = dict.object(forKey: "name") as! String as NSString!
+        self.genreID = dict.object(forKey: "id") as! NSNumber
     }
 }

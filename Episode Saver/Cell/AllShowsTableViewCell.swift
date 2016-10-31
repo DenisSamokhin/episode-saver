@@ -22,9 +22,9 @@ class AllShowsTableViewCell: UITableViewCell {
         addButton.setStyle(DynamicButtonStyle.Plus, animated: false)
         addButton.layer.cornerRadius = buttonBackgroundView.frame.size.width / 2
         buttonBackgroundView.layer.cornerRadius = buttonBackgroundView.frame.size.width / 2
-        self.buttonBackgroundView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.buttonBackgroundView.layer.shadowColor = UIColor.black.cgColor
         self.buttonBackgroundView.layer.shadowOpacity = 0.4
-        self.buttonBackgroundView.layer.shadowOffset = CGSizeMake(3, 3)
+        self.buttonBackgroundView.layer.shadowOffset = CGSize(width: 3, height: 3)
         self.buttonBackgroundView.layer.shadowRadius = 5
 //        self.buttonBackgroundView.layer.shadowPath = UIBezierPath(rect: self.buttonBackgroundView.bounds).CGPath
 //        self.buttonBackgroundView.layer.shouldRasterize = true
