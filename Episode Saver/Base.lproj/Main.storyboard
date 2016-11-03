@@ -226,7 +226,7 @@
                                                                 <constraint firstAttribute="width" constant="40" id="79P-3n-TQ3"/>
                                                                 <constraint firstAttribute="height" constant="40" id="G5k-MJ-cmI"/>
                                                             </constraints>
-                                                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                             <state key="normal">
                                                                 <color key="titleColor" red="1" green="0.21586476930000001" blue="0.22858012759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
