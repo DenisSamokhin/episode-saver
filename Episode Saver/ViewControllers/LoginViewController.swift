@@ -25,7 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - IBActions
     @IBAction func loginButtonClicked(_ sender: AnyObject) {
         if (AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.emailTextField) && AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.passwordTextField)) {
-            FIRAuth.auth()?.signInWithEmail(self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
+            FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
                 if (error != nil) {
                     print(error)
                 }else {
@@ -38,18 +38,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func signUpButtonClicked(_ sender: AnyObject) {
         if (AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.emailTextField) && AppController.sharedInstance.checkIfTextFieldTextIsVaild(textField: self.passwordTextField)) {
-            FIRAuth.auth()?.createUserWithEmail(self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
+            FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
                 if (error != nil) {
                     print(error)
                 }else {
                     print(user)
                     let postDict = NSMutableDictionary()
                     if user!.email != nil {
-                        postDict.setObject(user!.email!, forKey: "email")
+                        postDict.setObject(user!.email!, forKey: "email" as NSCopying)
                     }
-                    postDict.setObject(user!.uid, forKey: "userID")
+                    postDict.setObject(user!.uid, forKey: "userID" as NSCopying)
                     if user!.displayName != nil {
-                        postDict.setObject(user!.displayName!, forKey: "fullname")
+                        postDict.setObject(user!.displayName!, forKey: "fullname" as NSCopying)
                     }
                     AppController.dbReference.child("users").child(user!.uid).setValue(postDict)
                 }

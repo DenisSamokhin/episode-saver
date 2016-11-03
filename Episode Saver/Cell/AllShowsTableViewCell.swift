@@ -19,7 +19,7 @@ class AllShowsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        addButton.setStyle(DynamicButtonStyle.Plus, animated: false)
+        addButton.setStyle(DynamicButtonStyle.plus, animated: false)
         addButton.layer.cornerRadius = buttonBackgroundView.frame.size.width / 2
         buttonBackgroundView.layer.cornerRadius = buttonBackgroundView.frame.size.width / 2
         self.buttonBackgroundView.layer.shadowColor = UIColor.black.cgColor

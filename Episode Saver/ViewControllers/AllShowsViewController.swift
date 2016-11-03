@@ -51,7 +51,7 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
     
-    func getShowInfoByID(id: NSString!, completion:(_ show: ShowTMDBModel) -> Void, fail:@escaping (_ error: NSError) -> Void) {
+    func getShowInfoByID(id: NSString!, completion:@escaping (_ show: ShowTMDBModel) -> Void, fail:@escaping (_ error: NSError) -> Void) {
         APILayer.sharedInstance.getShowInfoByID(id: id, success: { (result) in
             let show: ShowTMDBModel! = ShowTMDBModel.init(dictionary: result)
             completion(show)
@@ -65,16 +65,16 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func addButtonClicked(_ sender: AnyObject) {
         let button: DynamicButton! = sender as! DynamicButton
-        if button.style == DynamicButtonStyle.Plus {
+        if button.style == DynamicButtonStyle.plus {
             // Add to list
             button.setStyle(DynamicButtonStyleClose.self, animated: true)
-        }else if button.style == DynamicButtonStyle.Close {
+        }else if button.style == DynamicButtonStyle.close {
             button.setStyle(DynamicButtonStylePlus.self, animated: true)
         }
-        let point = button.convertPoint(CGPoint.zero, toView: self.showsTableView)
-        let indexPath = self.showsTableView.indexPathForRowAtPoint(point)
-        let showID = self.tmdbIDsList.objectAtIndex((indexPath?.row)!)
-        let showModel = self.showsList.objectForKey(showID)
+        let point = button.convert(CGPoint.zero, to: self.showsTableView)
+        let indexPath = self.showsTableView.indexPathForRow(at: point)
+        let showID = self.tmdbIDsList.object(at: (indexPath?.row)!)
+        let showModel = self.showsList.object(forKey: showID)
     }
     
     // MARK: - UITableView
