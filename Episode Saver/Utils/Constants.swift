@@ -8,9 +8,17 @@
 
 import Foundation
 
+// - API keys
 var kTMDBApiKey: NSString! = "57a3a351b90fa8d25e14a3d9fd49bf98"
+
+// - Endpoints
 var kFirebaseDatabaseURL: NSString! = "https://episode-saver.firebaseio.com/"
-var kAllShowsDevelopmentURL: NSString! = "https://api-public.guidebox.com/v1.43/US/JMjLR7KJH7DJiDCMoUxvsf4xjLHnLW/shows/all/50/25/all/all"
-var kGuideBoxProductionAPIKey: NSString! = "rKQkbXMFxyf5w7IIg7gyv4YGzWuPzO5S"
 var kTheMovieDBBaseURL: NSString! = "http://api.themoviedb.org/3/"
+var kImagesStorageURL: NSString! = "https://image.tmdb.org/t/p/"
 var kTVEndpoint: NSString! = "tv/"
+var kSearchTVEndpoint: NSString! = "search/tv/"
+var kPopularTVEndpoint: NSString! = "tv/top_rated/"
+
+// - Image sizes
+var kPosterSize = "w500"
+var kBackdropSize = "w500"

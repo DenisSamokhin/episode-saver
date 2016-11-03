@@ -14,36 +14,28 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var showsTableView: UITableView!
     var tableViewDataSource: NSArray!
-    var tmdbIDsList: NSMutableArray! = NSMutableArray()
-    var imageURLsList: NSMutableArray! = NSMutableArray()
     var showsList: NSMutableDictionary! = NSMutableDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationItem.title = "TV Shows"
+        self.tableViewDataSource = NSArray()
         self.getShowsList()
     }
     
     // MARK: - Logic
     
     func getShowsList() {
-        var offset: NSString
-        if self.tmdbIDsList != nil && self.tmdbIDsList.count > 0 {
-            offset = "\(self.tmdbIDsList.count)" as NSString
+        var offset: NSInteger
+        if self.tableViewDataSource != nil && self.tableViewDataSource.count > 0 {
+            offset = self.tableViewDataSource.count / 20 + 1
         }else {
-            offset = "0"
+            offset = 1
         }
-        APILayer.sharedInstance.getTVShowsList(offset: offset, success: { (result) in
-            let tempArr = NSMutableArray()
-            let tempImagesArray = NSMutableArray()
-            for dict in result {
-                let showID = (dict as AnyObject).object(forKey: "themoviedb") as! NSNumber
-                let posterURL = (dict as AnyObject).object(forKey: "artwork_448x252") as! NSString
-                tempArr.add(showID.stringValue)
-                tempImagesArray.add(posterURL)
-            }
-            self.tmdbIDsList.addObjects(from: tempArr as [AnyObject])
-            self.imageURLsList.addObjects(from: tempImagesArray as [AnyObject])
+        APILayer.sharedInstance.getPopularTVShowsList(page: offset, success: { (result) in
+            let tempArr = NSMutableArray.init(array: self.tableViewDataSource)
+            tempArr.addObjects(from: result as! [Any])
+            self.tableViewDataSource = tempArr
             print("Data loaded")
             self.showsTableView.reloadData()
             }, fail: { (error) in
@@ -73,14 +65,14 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         let point = button.convert(CGPoint.zero, to: self.showsTableView)
         let indexPath = self.showsTableView.indexPathForRow(at: point)
-        let showID = self.tmdbIDsList.object(at: (indexPath?.row)!)
-        let showModel = self.showsList.object(forKey: showID)
+//        let showID = self.tableViewDataSource.object(at: (indexPath?.row)!)
+//        let showModel = self.showsList.object(forKey: showID)
     }
     
     // MARK: - UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tmdbIDsList.count
+        return self.tableViewDataSource.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -90,38 +82,26 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllShowsCell", for: indexPath) as! AllShowsTableViewCell
         cell.selectionStyle = .none
-        let showID = self.tmdbIDsList.object(at: (indexPath as NSIndexPath).row) as! NSString
-        let posterURL = self.imageURLsList.object(at: (indexPath as NSIndexPath).row) as! NSString
+        let model: ShowTMDBModel = self.tableViewDataSource[indexPath.row] as! ShowTMDBModel
         cell.avatarImageView.image = nil
-        cell.titleLabel.text = ""
-        AppController.sharedInstance.downloadImageWithURL(stringURL: posterURL) { (image) in
+        cell.titleLabel.text = model.title as String
+        AppController.sharedInstance.downloadPosterImageWithName(imageName: model.backdropPath!) { (image) in
             cell.avatarImageView.image = image
         }
-        self.getShowInfoByID(id: showID, completion: { (show) in
-            self.showsList.setObject(show, forKey: showID)
-            cell.titleLabel.text = show.title as String;
-        }) { (error) in
-            self.getShowInfoByID(id: showID, completion: { (show) in
-                self.showsList.setObject(show, forKey: showID)
-                cell.titleLabel.text = show.title as String;
-            }) { (error) in
-                
-            }
-        }
-        if (indexPath as NSIndexPath).row == self.tmdbIDsList.count - 10 {
+        if (indexPath as NSIndexPath).row == self.tableViewDataSource.count - 10 {
             self.getShowsList()
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let showID = self.tmdbIDsList.object(at: (indexPath as NSIndexPath).row)
-        let cell = tableView.cellForRow(at: indexPath) as! AllShowsTableViewCell
-        let showModel = self.showsList.object(forKey: showID) as! ShowTMDBModel
-        let showDetailsVC = self.storyboard!.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
-        showDetailsVC.currentShow = showModel
-        showDetailsVC.iconImage = cell.avatarImageView.image
-        self.navigationController!.pushViewController(showDetailsVC, animated: true)
+//        let showID = self.tmdbIDsList.object(at: (indexPath as NSIndexPath).row)
+//        let cell = tableView.cellForRow(at: indexPath) as! AllShowsTableViewCell
+//        let showModel = self.showsList.object(forKey: showID) as! ShowTMDBModel
+//        let showDetailsVC = self.storyboard!.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
+//        showDetailsVC.currentShow = showModel
+//        showDetailsVC.iconImage = cell.avatarImageView.image
+//        self.navigationController!.pushViewController(showDetailsVC, animated: true)
     }
     
 }

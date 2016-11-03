@@ -41,23 +41,21 @@ class AppController: NSObject {
         return image
     }
     
-    func saveImage (_ image: UIImage, path: String ) -> Bool{
+    func saveImage (_ image: UIImage, path: String ) {
         let pngImageData = UIImagePNGRepresentation(image)
-        let result = (try? pngImageData!.write(to: URL(fileURLWithPath: path), options: [.atomic])) != nil
-        return result
+        _ = (try? pngImageData!.write(to: URL(fileURLWithPath: path), options: [.atomic])) != nil
     }
     
-    func downloadImageWithURL(stringURL: NSString, success: @escaping (_ image: UIImage) -> Void) {
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
-            let imageName = stringURL.components(separatedBy: "/").last
-            let imagePath = self.fileInDocumentsDirectory(imageName!)
+    func downloadPosterImageWithName(imageName: NSString, success: @escaping (_ image: UIImage) -> Void) {
+        DispatchQueue.global(qos: .default).async {
+            let imagePath = self.fileInDocumentsDirectory(imageName as String)
             if let loadedImage = self.loadImageFromPath(imagePath) {
                 DispatchQueue.main.async {
                     success(loadedImage)
                 }
             } else {
-                let image: UIImage? = UIImage.init(data: try! Data.init(contentsOf: URL.init(string: stringURL as String)!))!
+                let imageURL = "\(kImagesStorageURL!)\(kPosterSize)/\(imageName)"
+                let image: UIImage? = UIImage.init(data: try! Data.init(contentsOf: URL.init(string: imageURL as String)!))!
                 if (image != nil) {
                     self.saveImage(image!, path: imagePath)
                     DispatchQueue.main.async {

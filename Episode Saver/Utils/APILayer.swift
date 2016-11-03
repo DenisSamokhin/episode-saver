@@ -13,11 +13,18 @@ class APILayer: NSObject {
     static let sharedInstance = APILayer()
     fileprivate override init() {}
     
-    func getTVShowsList(offset: NSString, success: @escaping (_ result: NSArray) -> Void, fail: @escaping (_ error: NSError) -> Void) {
+    func defaultParameters() -> [String : Any] {
+        return ["api_key" : kTMDBApiKey]
+    }
+    
+    func getPopularTVShowsList(page: Int, success: @escaping (_ result: NSArray) -> Void, fail: @escaping (_ error: NSError) -> Void) {
         DispatchQueue.global(qos: .default).async {
-            Alamofire.request("https://api-public.guidebox.com/v1.43/US/\(kGuideBoxProductionAPIKey)/shows/all/\(offset)/20/all/all",
+            let url = "\(kTheMovieDBBaseURL!)\(kPopularTVEndpoint!)"
+            let params: Parameters = ["api_key" : kTMDBApiKey,
+                                      "page" : page]
+            Alamofire.request(url,
                 method: .get,
-                parameters: nil,
+                parameters: params,
                 encoding: URLEncoding.default,
                 headers: nil)
                 .validate()
@@ -31,8 +38,15 @@ class APILayer: NSObject {
                         //let jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(response.data, options: <#T##NSJSONReadingOptions#>)
                         let value: NSDictionary = response.result.value as! [String: AnyObject] as NSDictionary
                         let resultArray: NSArray = value.object(forKey: "results") as! [AnyObject] as NSArray
+                        let showsArray: NSMutableArray = NSMutableArray()
+                        for dict in resultArray {
+                            let showModel: ShowTMDBModel! = ShowTMDBModel.init(dictionary: dict as! NSDictionary)
+                            if (showModel != nil) {
+                                showsArray.add(showModel)
+                            }
+                        }
                         DispatchQueue.main.async {
-                            success(resultArray)
+                            success(showsArray)
                         }
                     }
             }
@@ -43,7 +57,7 @@ class APILayer: NSObject {
     // MARK: - TheMovieDB API
     
     func getShowInfoByID(id: NSString!, success: @escaping (_ result: NSDictionary) -> Void, fail: @escaping (_ error: NSError) -> Void) {
-        DispatchQueue.global(priority: .default).async {
+        DispatchQueue.global(qos: .default).async {
             let url = "\(kTheMovieDBBaseURL)\(kTVEndpoint)\(id)"
             Alamofire.request(url,
                               method: .get,
