@@ -17,6 +17,8 @@ class APILayer: NSObject {
         return ["api_key" : kTMDBApiKey]
     }
     
+    // MARK: - TheMovieDB API
+    
     func getPopularTVShowsList(page: Int, success: @escaping (_ result: NSArray) -> Void, fail: @escaping (_ error: NSError) -> Void) {
         DispatchQueue.global(qos: .default).async {
             let url = "\(kTheMovieDBBaseURL!)\(kPopularTVEndpoint!)"
@@ -54,11 +56,9 @@ class APILayer: NSObject {
         
     }
     
-    // MARK: - TheMovieDB API
-    
-    func getShowInfoByID(id: NSString!, success: @escaping (_ result: NSDictionary) -> Void, fail: @escaping (_ error: NSError) -> Void) {
+    func getShowInfoByID(id: NSString!, success: @escaping (_ result: ShowTMDBModel) -> Void, fail: @escaping (_ error: NSError) -> Void) {
         DispatchQueue.global(qos: .default).async {
-            let url = "\(kTheMovieDBBaseURL)\(kTVEndpoint)\(id)"
+            let url = "\(kTheMovieDBBaseURL!)\(kTVEndpoint!)\(id!)"
             Alamofire.request(url,
                               method: .get,
                               parameters: ["api_key": kTMDBApiKey],
@@ -72,9 +72,17 @@ class APILayer: NSObject {
                         }
                     }else {
                         let value: NSDictionary = response.result.value as! [String: AnyObject] as NSDictionary
-                        DispatchQueue.main.async {
-                            success(value)
+                        let showModel: ShowTMDBModel! = ShowTMDBModel.init(dictionary: value)
+                        if (showModel != nil) {
+                            DispatchQueue.main.async {
+                                success(showModel)
+                            }
+                        }else {
+                            DispatchQueue.main.async {
+                                fail(response.result.error! as NSError)
+                            }
                         }
+                        
                     }
             }
         }

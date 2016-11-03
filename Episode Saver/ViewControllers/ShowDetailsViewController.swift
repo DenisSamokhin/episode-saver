@@ -27,23 +27,34 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var topContainerView: UIView!
     var currentShow: ShowTMDBModel!
-    var iconImage: UIImage!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.navigationItem.title = "TV Shows"
-        self.initUI()
+        getShowInfo()
+    }
+    
+    func getShowInfo() {
+        APILayer.sharedInstance.getShowInfoByID(id: self.currentShow.showID.stringValue as NSString!, success: {result in
+            self.currentShow = result
+            self.initUI()
+        }, fail: {error in
+            print(error)
+        })
     }
     
     func initUI() {
         self.title = "TV Show Details"
         self.contentViewWidthConstraint.constant = self.view.frame.size.width
         self.topContainerHeightConstraint.constant = self.view.frame.size.width / 1.77777778 + 60;
-        //self.contentView.backgroundColor = UIColor.greenColor()
         self.topContainerView.backgroundColor = UIColor.clear
         self.descriptionContainerView.backgroundColor = UIColor.clear
-        self.avatarImageView.image = iconImage
+        AppController.sharedInstance.downloadPosterImageWithName(imageName: self.currentShow.backdropPath!) { (image) in
+            self.avatarImageView.image = image
+        }
         let labelNameString = NSMutableAttributedString(string:"Title", attributes:[NSFontAttributeName : UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : UIColor.gray])
-        let titleString = NSMutableAttributedString(string:"\n\(currentShow.title)", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 22.0)])
+        let titleString = NSMutableAttributedString(string:"\n\(currentShow.title!)", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 22.0)])
         labelNameString.append(titleString)
         self.titleLabel.attributedText = labelNameString;
         self.yearLabel.text = self.currentShow.firstAirDate.components(separatedBy: "-").first
@@ -54,24 +65,25 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
             if genresArray.count == 1 {
                 genresString = obj.name
             }else if genresArray.count > 1 {
-                genresString = genresString.appending("\(obj.name), ") as NSString!
+                genresString = genresString.appending("\(obj.name!), ") as NSString!
                 if index == genresArray.count-1 {
                     genresString = genresString.substring(to: genresString.length-2) as NSString!
                 }
             }
         }
         self.genreLabel.text = genresString as String
-        let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0), NSForegroundColorAttributeName : UIColor .init(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)])
-        let descriptionString = NSMutableAttributedString(string:"\n\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFont(ofSize: 17.0)])
-        labelDescriptionString.append(descriptionString)
-        self.descriptionTextView.attributedText = labelDescriptionString;
+        //let labelDescriptionString = NSMutableAttributedString(string:"Description", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0), NSForegroundColorAttributeName : UIColor .init(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)])
+        let descriptionString = NSMutableAttributedString(string:"\(currentShow.showDescription as! String)", attributes:[NSFontAttributeName : UIFont.systemFont(ofSize: 17.0)])
+        self.descriptionTextView.text = currentShow.showDescription as! String;
         print(descriptionString)
         self.view.layoutIfNeeded()
+        let newSize: CGSize = self.descriptionTextView.sizeThatFits(CGSize(width: self.descriptionTextView.bounds.size.width, height: .greatestFiniteMagnitude))
+        
         let width: CGFloat = self.descriptionTextView.frame.size.width
-        let resultRect = labelDescriptionString.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
-        self.descriptionContainerHeight.constant = resultRect.size.height + self.descriptionTextView.frame.origin.y + 20;
-        self.view.layoutIfNeeded()
-        self.contentVIewHeightConstraint.constant = self.descriptionContainerView.frame.origin.y + self.descriptionContainerView.frame.size.height
+        let height = descriptionString.heightWithConstrainedWidth(width: width)
+//        self.descriptionContainerHeight.constant = height + self.descriptionTextView.frame.origin.y + 60;
+//        self.view.layoutIfNeeded()
+        self.contentVIewHeightConstraint.constant = self.descriptionContainerView.frame.origin.y + newSize.height + 135
         self.view.layoutIfNeeded()
         self.mainScrollView.contentSize = self.contentView.frame.size
     }

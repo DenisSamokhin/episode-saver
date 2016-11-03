@@ -43,16 +43,6 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
     
-    func getShowInfoByID(id: NSString!, completion:@escaping (_ show: ShowTMDBModel) -> Void, fail:@escaping (_ error: NSError) -> Void) {
-        APILayer.sharedInstance.getShowInfoByID(id: id, success: { (result) in
-            let show: ShowTMDBModel! = ShowTMDBModel.init(dictionary: result)
-            completion(show)
-        }) { (error) in
-            fail(error)
-        }
-    }
-    
-    
     // MARK: - IBActions
     
     @IBAction func addButtonClicked(_ sender: AnyObject) {
@@ -95,13 +85,10 @@ class AllShowsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let showID = self.tmdbIDsList.object(at: (indexPath as NSIndexPath).row)
-//        let cell = tableView.cellForRow(at: indexPath) as! AllShowsTableViewCell
-//        let showModel = self.showsList.object(forKey: showID) as! ShowTMDBModel
-//        let showDetailsVC = self.storyboard!.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
-//        showDetailsVC.currentShow = showModel
-//        showDetailsVC.iconImage = cell.avatarImageView.image
-//        self.navigationController!.pushViewController(showDetailsVC, animated: true)
+        let model: ShowTMDBModel = self.tableViewDataSource[indexPath.row] as! ShowTMDBModel
+        let showDetailsVC = self.storyboard!.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
+        showDetailsVC.currentShow = model
+        self.navigationController!.pushViewController(showDetailsVC, animated: true)
     }
     
 }
