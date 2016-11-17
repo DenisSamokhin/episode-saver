@@ -19,6 +19,7 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var contentVIewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var scoreView: DSCircularProgressBar!
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var bottomContainerView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -32,6 +33,10 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.navigationItem.title = "TV Shows"
+        scoreView.progress = 0
+        scoreView.radius = 0
+        scoreView.strokeColor = UIColor.red
+        self.scoreView.setNeedsDisplay()
         getShowInfo()
     }
     
@@ -53,6 +58,8 @@ class ShowDetailsViewController: UIViewController, UIScrollViewDelegate {
         AppController.sharedInstance.downloadPosterImageWithName(imageName: self.currentShow.backdropPath!) { (image) in
             self.avatarImageView.image = image
         }
+        scoreView.progress = self.currentShow.rating as CGFloat!
+        scoreView.setNeedsDisplay()
         let labelNameString = NSMutableAttributedString(string:"Title", attributes:[NSFontAttributeName : UIFont.systemFont(ofSize: 12.0), NSForegroundColorAttributeName : UIColor.gray])
         let titleString = NSMutableAttributedString(string:"\n\(currentShow.title!)", attributes:[NSFontAttributeName : UIFont.boldSystemFont(ofSize: 22.0)])
         labelNameString.append(titleString)
